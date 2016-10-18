@@ -1,0 +1,47 @@
+---
+title: "Places to see in Belfast"
+author: "Darragh McLernon"
+date: "10/18/2016"
+output: html_document
+---
+
+## Visit Belfast
+
+Belfast is Northern Ireland’s capital. It was the birthplace of the RMS Titanic, which famously struck an iceberg and sunk in 1912. This legacy is recalled in the renovated dockyards' Titanic Quarter, which includes the Titanic Belfast, an aluminium-clad museum reminiscent of a ship’s hull, as well as shipbuilder Harland & Wolff’s Drawing Offices and the Titanic Slipways, which now host open-air concerts.
+
+The map below shows some places to visit in Belfast
+
+```{r, echo = FALSE, message=F, warning=F}
+library(leaflet)
+
+belfast_icon <- makeIcon(
+  iconUrl = "http://logok.org/wp-content/uploads/2014/12/Visit-Belfast-logo.png",
+  iconWidth = 110, iconHeight = 90
+)
+
+belfast_locations <- data.frame(
+  lat = c(54.609426 , 54.596499, 54.609913, 54.599682),
+  lng = c(-5.897589 , -5.930058, -5.942357, -5.946145))
+
+belfast_popup_text <- c(
+  "<h3>Harland and Wolff</h3>
+    <p>The Titanic was build here. The two giant yellow cranes are called Samson and Goliath</p>
+    <img src=\"http://www.claytonhotelbelfast.com/wp-content/uploads/2015/04/Harland-and-Wolff-Shipyard-Resized-2048x1024.jpg\" width=\"300\" height=\"100\">",
+  "<h3>Belfast City Hall</h3>
+    <p>The city hall in Belfast was built in 1906 at a cost of £369,000 at the time</p>
+    <img src=\"http://www.guide-to-nireland.com/cityhall1.jpeg\" width=\"300\" height=\"100\">",
+  "<h3>Crumlin Road Gaol</h3>
+    <p>Jail that closed in 1996 and now hosts public tours, live music and paranormal investigation events</p>
+    <img src=\"http://blogs.qub.ac.uk/iss/files/2014/10/crumlin-road-gaol.jpg\" width=\"300\" height=\"100\">",
+  "<h3>International Wall</h3>
+    <p>One of many places in Belfast to see murals, depicting histocial events and messages important to the local communities</p>
+    <img src=\"http://www.janmary.com/wp-content/uploads/2011/08/international+wall+22.jpg\" width=\"300\" height=\"100\">"
+)
+
+belfast_locations %>% 
+  leaflet(width = "100%", height = 700) %>%
+  addTiles() %>%
+  addMarkers(icon = belfast_icon, popup = belfast_popup_text) %>%
+  setView(lat=54.596455, lng=-5.929993, zoom=13)
+
+```
